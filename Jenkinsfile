@@ -89,9 +89,8 @@ pipeline{
         }
         stage('Push changed deployment file to Github'){
             steps{
-                container('docker'){
-                    script{
-                        sh """
+                script{
+                    sh """
                              git config --global user.name "bruceherve"
                              git config --global user.email "hernino25@gmail.com"
                              git add deployment.yaml
@@ -100,7 +99,6 @@ pipeline{
                                 sh "git push http://$user:$pass@git@github.com:bruceherve/go-fiber-api.git"
    
                                   }
-                    }
                 }
             }
         }
