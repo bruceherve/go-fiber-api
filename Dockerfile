@@ -11,10 +11,11 @@ FROM golang:1.18 AS build
 WORKDIR /app
 
 # Set ENV variables
-ENV CGO_ENABLED=0 \
-    GO111MODULE=on\
+ENV GO111MODULE=on\
+    CGO_ENABLED=0 \
     GOOS=linux \
     GOARCH=amd64\
+    GOFLAGS=-mod=vendor\
     GOPROXY=https://proxy.golang.org
 
 # copy Go modules and dependencies to image
@@ -22,7 +23,7 @@ COPY go.mod ./
 COPY go.sum ./
 
 # download Go modules and dependencies
-RUN go mod download
+RUN go mod vendor
 
 # copy directory files i.e all files ending with .go
 COPY . .
