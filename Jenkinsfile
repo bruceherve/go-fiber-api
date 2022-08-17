@@ -100,16 +100,12 @@ pipeline{
             
         }
         stage('Push deployment file to Github'){
-            steps{
-                container('docker'){
-                    script{
-                          withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'password', usernameVariable: 'user')]) {
-                                    sh "git push http://$user:$pass@git@github.com:bruceherve/go-fiber-api.git"
+            
+                withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'password', usernameVariable: 'user')]) {
+                    sh "git push http://$user:$pass@git@github.com:bruceherve/go-fiber-api.git"
    
-                                  }
-                    }
                 }
-            }
+            
         }
     }
 }
