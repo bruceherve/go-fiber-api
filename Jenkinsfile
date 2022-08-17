@@ -99,14 +99,5 @@ pipeline{
             }
             
         }
-        stage('Push deployment file to Github'){
-            steps{
-                withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'password', usernameVariable: 'user')]) {
-                    sh "git push http://$user:$pass@git@github.com:bruceherve/go-fiber-api.git"
-   
-                }
-            }
-            
-        }
     }
 }
