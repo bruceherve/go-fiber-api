@@ -19,8 +19,10 @@ ENV GO111MODULE=on\
     GOPROXY=https://proxy.golang.org
 
 # copy Go modules and dependencies to image
-COPY go.mod ./
-COPY go.sum ./
+#COPY go.mod ./
+#COPY go.sum ./
+COPY go.mod go.mod
+COPY go.sum go.sum
 
 # download Go modules and dependencies
 RUN go mod download 
