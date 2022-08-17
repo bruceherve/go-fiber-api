@@ -13,7 +13,8 @@ WORKDIR /app
 # Set ENV variables
 ENV CGO_ENABLED=0 \
     GOOS=linux \
-    GOARCH=amd64
+    GOARCH=amd64\
+    GOPROXY=https://proxy.golang.org
 
 # copy Go modules and dependencies to image
 COPY go.mod ./
