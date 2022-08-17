@@ -15,17 +15,18 @@ ENV GO111MODULE=on\
     CGO_ENABLED=0 \
     GOOS=linux \
     GOARCH=amd64\
-   # GOFLAGS=-mod=vendor\
+    GOFLAGS=-mod=vendor\
     GOPROXY=https://proxy.golang.org
 
 # copy Go modules and dependencies to image
-#COPY go.mod ./
-#COPY go.sum ./
-COPY go.mod go.mod
-COPY go.sum go.sum
+COPY go.mod ./
+COPY go.sum ./
+#COPY go.mod go.mod
+#COPY go.sum go.sum
 
 # download Go modules and dependencies
-RUN go mod download 
+RUN go mod vendor 
+
 
 # copy directory files i.e all files ending with .go
 COPY . .
