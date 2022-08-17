@@ -87,5 +87,22 @@ pipeline{
                 }
             }
         }
+        stage('Push changed deployment file to Github'){
+            steps{
+                container('docker'){
+                    script{
+                        sh """
+                             git config --global user.name "bruceherve"
+                             git config --global user.email "hernino25@gmail.com"
+                             git add deployment.yaml
+                             git commit -m 'Updated the deployment file'"""
+                             withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'password', usernameVariable: 'user')]) {
+                                sh "git push http://$user:$pass@git@github.com:bruceherve/go-fiber-api.git"
+   
+                                  }
+                    }
+                }
+            }
+        }
     }
 }
