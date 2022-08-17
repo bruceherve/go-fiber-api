@@ -45,9 +45,11 @@ pipeline{
         }
         stage('Build Docker image'){
             steps{
-                    script{
-                      docker_image = docker.build "${IMAGE_NAME}"
-                    }
+                   container('docker'){
+                        sh """
+                         docker_image = docker.build "${IMAGE_NAME}"
+                         """
+                   }
                 
             }
         }
