@@ -47,9 +47,8 @@ pipeline{
             steps{
                    container('docker'){
                         script{
-                            sh """
                          docker_image = docker.build "${IMAGE_NAME}"
-                         """
+                         
                         }
                    }
                 
