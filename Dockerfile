@@ -5,13 +5,14 @@
 ##
 
 # specify the base image to  be used for the application, alpine or ubuntu
-FROM golang:1.17-alpine AS build
+FROM golang:1.18 AS build
 
 # create a working directory inside the image
 WORKDIR /app
 
 # Set ENV variables
 ENV CGO_ENABLED=0 \
+    GO111MODULE=on\
     GOOS=linux \
     GOARCH=amd64\
     GOPROXY=https://proxy.golang.org
