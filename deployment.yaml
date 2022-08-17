@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: go-fiber-api-deploy
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: go-fiber-api
+  template:
+    metadata:
+      labels:
+        app: go-fiber-api
+    spec:
+      containers:
+      - name: go-fiber-api-container
+        image: hernino/go-fiber-api:7
+        ports:
+        - containerPort: 5000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: go-fiber-api-svc
+spec:
+  type: NodePort
+  ports:
+  - port: 80
+    targetPort: 5000
+    nodePort: 30000
+  selector:
+    app: go-fiber-api
