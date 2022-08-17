@@ -54,7 +54,7 @@ pipeline{
                 
             }
         }
-        stage('Push Docker Image '){
+        stage('Push Docker Image'){
             steps{
                 container('docker'){
                     script{
@@ -64,6 +64,12 @@ pipeline{
                         }
                     }
                 }
+            }
+        }
+        stage('Delete Docker Image'){
+            steps{
+                sh "docker rmi ${IMAGE_NAME}:${IMAGE_TAG}"
+                sh "docker rmi ${IMAGE_NAME}:latest"
             }
         }
     }
