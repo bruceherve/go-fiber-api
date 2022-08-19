@@ -95,6 +95,10 @@ pipeline{
                         git config --global user.email "hernino25@gmail.com"
                         git add deployment.yaml
                         git commit -m 'Updated the deployment file'"""
+
+                        withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'pass', usernameVariable: 'user')]) {
+                            sh "git push http://$user:$pass@github.com/bruceherve/go-fiber-api.git"
+                        }
                 }
             }
             
