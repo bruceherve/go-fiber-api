@@ -91,13 +91,13 @@ pipeline{
             steps{
                 script{
                     sh """
-                        git config --global user.name "bruceherve"
-                        git config --global user.email "hernino25@gmail.com"
+                        git config user.name "bruceherve"
+                        git config user.email "hernino25@gmail.com"
                         git add deployment.yaml
                         git commit -m 'Updated the deployment file'"""
 
                         withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'pass', usernameVariable: 'user')]) {
-                            sh "git push http://$user:$pass@github.com/bruceherve/go-fiber-api.git"
+                            sh "git push https://${user}:${pass}@github.com/${user}/go-fiber-api.git HEAD:main"
                         }
                 }
             }
