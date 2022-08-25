@@ -76,7 +76,7 @@ pipeline{
                 }
             }
         }
-        stage('Updating K8s deployment file'){
+        stage('Updating K8s deployment'){
             steps{
                 container('docker'){
                     script{
