@@ -47,7 +47,8 @@ pipeline{
             steps{
                    container('docker'){
                         script{
-                         docker_image = docker.build "${IMAGE_NAME}"
+                             sh 'docker build -t ${IMAGE_NAME}:${IMAGE_TAG} .'
+                             sh 'docker build -t ${IMAGE_NAME}:latest .'
                          
                         }
                    }
@@ -60,12 +61,10 @@ pipeline{
                 script{
                     withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'pass', usernameVariable: 'user')]) {
                             
-                          sh ''' 
-                            echo '${pass} | docker login -u {$user} --password-stdin'
-                            docker_image.push("${BUILD_NUMBER}")
-                            docker_image.push('latest')
-                          '''
-                          
+                           
+                          sh '${pass} | docker login -u {$user} --password-stdin'
+                          sh 'docker push ${IMAGE_NAME}:${IMAGE_TAG} .'
+                          sh 'docker push ${IMAGE_NAME}:latest .'
                     }
                     
                 }
