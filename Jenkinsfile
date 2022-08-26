@@ -59,7 +59,7 @@ pipeline{
                     sh '''
                         echo '${pass} | docker login -u ${user} --password-stdin'
                         echo 'docker push ${IMAGE_NAME}:${IMAGE_TAG} .'
-                        echo 'docker push ${IMAGE_NAME}:latest .'
+    
             
                     '''
                 }
