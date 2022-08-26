@@ -67,6 +67,17 @@ pipeline{
                 }
                }
             }
+
+        }
+        stage('Push Docker Image '){
+            steps{
+                container('docker'){
+                    script{
+                        docker_image.push("${BUILD_NUMBER}")
+                        docker_image.push('latest')
+                    }
+                }
+            }
         }
         stage('Delete Docker Image'){
             steps{
