@@ -58,9 +58,9 @@ pipeline{
             steps{
                container('docker'){
                 script{
-                    withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'pass', usernameVariable: 'user')]) {
-                        sh 'docker login -u $user --password $pass'
-                        sh 'docker_image.push ${BUILD_NUMBER}'
+                   docker.withRegistry('', REGISTRY_CREDS ){
+                        docker_image.push("${BUILD_NUMBER}")
+                        docker_image.push('latest')
                     }
                     
                 }
