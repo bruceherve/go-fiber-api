@@ -60,7 +60,7 @@ pipeline{
                     script{
                         docker.withRegistry('',REGISTRY_CREDS){
                             docker_image.push("${BUILD_NUMBER}")
-                            docker_image.push('latest')
+                            docker_image.push('latest')                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
                         }
                     }
                 }
@@ -68,7 +68,7 @@ pipeline{
         }
         stage('Delete Docker Image'){
             steps{
-                container('docker'){
+                container('docker'){                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
                     script{
                         sh "docker rmi ${IMAGE_NAME}:${IMAGE_TAG}"
                         sh "docker rmi ${IMAGE_NAME}:latest"
