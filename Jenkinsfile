@@ -60,7 +60,7 @@ pipeline{
                 script{
                     withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'pass', usernameVariable: 'user')]) {
                             sh """ 
-                                ${pass} | docker login -u ${user} --password-stdin
+                                echo"${pass} | docker login -u ${user} --password-stdin"
                             """
                     }
                 }
