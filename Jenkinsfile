@@ -54,15 +54,13 @@ pipeline{
                 
             }
         }
-        stage('Push Docker Image'){
+        stage('Login Into Dockerhub'){
             steps{
                container('docker'){
                 script{
                     withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'pass', usernameVariable: 'user')]) {
                             sh """ 
                                 ${pass} | docker login -u ${user} --password-stdin
-                                 docker_image.push("${BUILD_NUMBER}")
-                                 docker_image.push('latest')
                             """
                     }
                 }
