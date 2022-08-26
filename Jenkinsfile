@@ -63,7 +63,7 @@ pipeline{
                             
                            
                           sh 'docker login -u $user --password $pass'
-                          sh 'docker https://github.com/bruceherve/go-fiber-api.git push ${IMAGE_NAME}:${IMAGE_TAG} .'
+                          sh 'docker push ${IMAGE_NAME}:${IMAGE_TAG} .'
                           sh 'docker push ${IMAGE_NAME}:latest .'
                     }
                     
