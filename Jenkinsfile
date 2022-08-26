@@ -56,14 +56,17 @@ pipeline{
         }
         stage('Push Docker Image'){
             steps{
-                container('docker'){
-                    script{
-                        docker.withRegistry('https://registry.hub.docker.com', 'dockerhub'){
-                            docker_image.push("${BUILD_NUMBER}")
-                            docker_image.push('latest')                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
-                        }
+               container('docker'){
+                script{
+                    withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'pass', usernameVariable: 'user')]) {
+                            sh """ 
+                                echo "${pass} | docker login -u ${user} --password-stdin"
+                                 docker_image.push("${BUILD_NUMBER}")
+                                 docker_image.push('latest')
+                            """
                     }
                 }
+               }
             }
         }
         stage('Delete Docker Image'){
