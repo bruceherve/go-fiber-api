@@ -53,10 +53,10 @@ pipeline{
         }
         stage('Push Docker Image'){
             steps{
-                withCredentials([usernamePassword(credentialsId: 'docker-login-creds', passwordVariable: 'password', usernameVariable: 'username')]){
+                withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'password', usernameVariable: 'username')]){
     
                     sh '''
-                        echo "${pass} | docker login -u ${user} --password-stdin"
+                        echo '${pass} | docker login -u ${user} --password-stdin'
             
                     '''
                 }
