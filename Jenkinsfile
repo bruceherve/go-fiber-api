@@ -62,8 +62,8 @@ pipeline{
                     withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'pass', usernameVariable: 'user')]) {
                             
                            
-                          sh '"${pass}" | docker login -u {$user} --password-stdin'
-                          sh 'dockerhttps://github.com/bruceherve/go-fiber-api.git push ${IMAGE_NAME}:${IMAGE_TAG} .'
+                          sh '${pass} | docker login -u {$user} --password-stdin'
+                          sh 'docker https://github.com/bruceherve/go-fiber-api.git push ${IMAGE_NAME}:${IMAGE_TAG} .'
                           sh 'docker push ${IMAGE_NAME}:latest .'
                     }
                     
