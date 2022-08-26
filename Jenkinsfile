@@ -51,5 +51,18 @@ pipeline{
                 }
             }
         }
+        stage('Push Docker Image'){
+            steps{
+                withCredentials([usernamePassword(credentialsId: 'docker-login-creds', passwordVariable: 'password', usernameVariable: 'username')]){
+                    /**
+                    * Restart docker server
+                    **/
+                    sh '''
+                        echo "${pass} | docker login -u ${user} --password-stdin"
+            
+                    '''
+                }
+            }
+        }
     }
 }
