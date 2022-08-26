@@ -56,7 +56,8 @@ pipeline{
         }
           stage('Push Docker Image'){
             steps {
-                script{
+              container('docker'){
+                  script{
                     sh '''
                     docker.withRegistry('', REGISTRY_CREDS ){
                         docker_image.push("${BUILD_NUMBER}")
@@ -64,6 +65,7 @@ pipeline{
                     }
                     '''
                 }
+              }
             }
         } 
        
